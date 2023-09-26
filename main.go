@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"strconv"
+	"go-project/Struct"
 	"time"
 )
 
@@ -14,46 +14,58 @@ var ticketbought uint
 var fullname = make([]map[string]string, 0)
 
 func main() {
-	remainingticket = 50
+	Struct.Function()
+	// project1.Function()
+	// project1.Function2()
+	// project1.Function23()
+	// remainingticket = 50
+	// pointer.Test("hghg", "hgfhf")
+	// var sqrt, err = Sqrt(-64)
+	// DivideByZero(2, 0)
+	// DivideByZero(2, 2)
+	// if err != nil {
+	// 	fmt.Print(err, "\n")
+	// } else {
+	// 	fmt.Print(sqrt, "\n")
+	// }
+	// for {
 
-	for {
+	// 	var myMap = make(map[string]string) // Create a new map in each iteration
 
-		var myMap = make(map[string]string) // Create a new map in each iteration
+	// 	fmt.Println("Enter your first name:")
+	// 	fmt.Scan(&fname)
+	// 	fmt.Println("Enter your last name:")
+	// 	fmt.Scan(&lname)
+	// 	fmt.Println("Enter your email id:")
+	// 	fmt.Scan(&email)
+	// 	fmt.Println("Enter the number of tickets to buy:")
+	// 	fmt.Scan(&ticketbought)
+	// 	go sendTicket(fname, lname, ticketbought)
+	// 	if ticketbought > remainingticket {
+	// 		fmt.Printf("Sorry, we only have %v ticket(s) left. Please enter a lower amount.\n", remainingticket)
+	// 		continue
+	// 	}
 
-		fmt.Println("Enter your first name:")
-		fmt.Scan(&fname)
-		fmt.Println("Enter your last name:")
-		fmt.Scan(&lname)
-		fmt.Println("Enter your email id:")
-		fmt.Scan(&email)
-		fmt.Println("Enter the number of tickets to buy:")
-		fmt.Scan(&ticketbought)
-		go sendTicket(fname, lname, ticketbought)
-		if ticketbought > remainingticket {
-			fmt.Printf("Sorry, we only have %v ticket(s) left. Please enter a lower amount.\n", remainingticket)
-			continue
-		}
+	// 	myMap["firstName"] = fname // Update map with user input
+	// 	myMap["lastName"] = lname
+	// 	myMap["email"] = email
+	// 	myMap["ticketsBought"] = strconv.FormatUint(uint64(ticketbought), 10)
 
-		myMap["firstName"] = fname // Update map with user input
-		myMap["lastName"] = lname
-		myMap["email"] = email
-		myMap["ticketsBought"] = strconv.FormatUint(uint64(ticketbought), 10)
+	// 	greeting(fname, email, remainingticket, ticketbought)
+	// 	remainingticket = remainingticket - ticketbought
 
-		greeting(fname, email, remainingticket, ticketbought)
-		remainingticket = remainingticket - ticketbought
+	// 	fullname = append(fullname, myMap)
 
-		fullname = append(fullname, myMap)
+	// 	fmt.Println(fullname)
+	// 	fmt.Println(len(fullname))
 
-		fmt.Println(fullname)
-		fmt.Println(len(fullname))
+	// 	printfname()
 
-		printfname()
-
-		if remainingticket == 0 {
-			fmt.Println("Sorry, we are all sold out. Please try reducing the ticket amount or come back later.")
-			break
-		}
-	}
+	// 	if remainingticket == 0 {
+	// 		fmt.Println("Sorry, we are all sold out. Please try reducing the ticket amount or come back later.")
+	// 		break
+	// 	}
+	// }
 }
 
 func greeting(fname string, email string, remainingticket uint, ticketbought uint) {
