@@ -1,4 +1,4 @@
-package pointer
+package main
 
 import "fmt"
 
@@ -22,7 +22,7 @@ func Test(recipient string, text string) {
 	fmt.Println("=====================================")
 }
 
-func main() {
+func funct() {
 	Test("Lane", "Textio is getting better everyday!")
 	Test("Allan", "This pointer stuff is weird...")
 	Test("Tiffany", "What time will you be home for dinner?")

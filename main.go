@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"go-project/Struct"
+	//"go-project/Struct"
 	"time"
 )
 
@@ -14,7 +14,7 @@ var ticketbought uint
 var fullname = make([]map[string]string, 0)
 
 func main() {
-	Struct.Function()
+	//Struct.Function()
 	// project1.Function()
 	// project1.Function2()
 	// project1.Function23()

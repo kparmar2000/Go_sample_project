@@ -1,4 +1,4 @@
-package Struct
+package main
 
 import "fmt"
 
@@ -18,12 +18,16 @@ type rect struct {
 	height int
 }
 
-var myCar = car{company: "honda", cc: 1800, model: "civic", frontwheel: wheel{10, "alloy"}, rearwheel: wheel{20, "metal"}}
+var myCar = car{
+	company: "honda",
+	cc:      1800, model: "civic",
+	frontwheel: wheel{10, "alloy"},
+	rearwheel:  wheel{20, "metal"}}
 
 func rectarea(r rect) int {
 	return r.height * r.width
 }
-func (r rect) rectarea1 int{
+func (r rect) rectarea1() int {
 	return r.height * r.width
 }
 func Function() {
