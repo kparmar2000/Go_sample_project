@@ -13,6 +13,9 @@ func main() {
 	changenumber(ptr)
 	fmt.Println(A)
 	fmt.Println(reflect.TypeOf(A))
+	a := 123
+	var p *int = &a
+	fmt.Println(p)
 
 }
 func changenumber(p *int) {

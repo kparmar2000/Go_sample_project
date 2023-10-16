@@ -5,14 +5,11 @@ import (
 	"net/http"
 )
 
-func main() {
-	http.HandleFunc("/", MyHandler1)
-	http.HandleFunc("/John", MyHandler2)
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello, World!")
+}
+
+func main1() {
+	http.HandleFunc("/", handler)
 	http.ListenAndServe(":8080", nil)
-}
-func MyHandler1(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello World\n")
-}
-func MyHandler2(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello John\n")
 }
