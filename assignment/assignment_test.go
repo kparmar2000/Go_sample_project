@@ -8,6 +8,11 @@ import (
 	"testing"
 )
 
+type ExpectedStruct struct {
+	Comp71 IndexStructure `json:"comp-7-s-2021.11.22"`
+	Comp72 IndexStructure `json:"comp-7-s-2021.11.23"`
+}
+
 func TestUnmarshalJSON(t *testing.T) {
 	// jsonData := []byte(`{
 	// 	"comp-7-s-2021.11.22": {
@@ -70,6 +75,11 @@ func TestUnmarshalJSON(t *testing.T) {
 	if err != nil {
 		log.Fatalf("Error reading file: %v", err)
 	}
+	//var expected ExpectedStruct
+	// err2 := json.Unmarshal([]byte(content), &expected)
+	// if err2 != nil {
+	// 	t.Errorf("Error unmarshalling JSON: %v", err2)
+	// }
 
 	var indexData IndexFormat
 
@@ -87,5 +97,8 @@ func TestUnmarshalJSON(t *testing.T) {
 	if indexData.Comp71.Settings.Index.NumberOfShards != expectedNumberOfShards {
 		t.Errorf("Expected NumberOfShards %s, but got %s", expectedNumberOfShards, indexData.Comp71.Settings.Index.NumberOfShards)
 	}
+	// if !reflect.DeepEqual(expected, indexData) {
+	// 	t.Errorf("Expected %v, but got %v", expected, indexData)
+	// }
 
 }

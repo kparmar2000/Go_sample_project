@@ -248,11 +248,11 @@ func main() {
 	var indexData IndexFormat
 	var indexData2 map[string]interface{}
 
-	err2 := json.Unmarshal(content, &indexData)
-	if err2 != nil {
-		fmt.Println("Error found while unmarshal:", err2)
-		return
-	}
+	// err2 := json.Unmarshal(content, &indexData)
+	// if err2 != nil {
+	// 	fmt.Println("Error found while unmarshal:", err2)
+	// 	return
+	// }
 	err1 := json.Unmarshal(content, &indexData2)
 	if err1 != nil {
 		fmt.Println("Error found while unmarshal:", err1)
