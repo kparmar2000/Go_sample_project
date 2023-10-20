@@ -77,21 +77,11 @@ type AutocompleteTokenizer struct {
 	MaxGram    string   `json:"max_gram"`
 }
 
-type AutocompleteVersionNumberTokenizer struct {
-	TokenChars []string `json:"token_chars"`
-	MinGram    string   `json:"min_gram"`
-	Type       string   `json:"type"`
-	MaxGram    string   `json:"max_gram"`
+type Analyzer struct {
+	Autocomplete               Autocomplete `json:"autocomplete"`
+	AutocompleteVersionNumbers Autocomplete `json:"autocomplete_version_numbers"`
 }
 
-type Analyzer struct {
-	Autocomplete               Autocomplete               `json:"autocomplete"`
-	AutocompleteVersionNumbers AutocompleteVersionNumbers `json:"autocomplete_version_numbers"`
-}
-type AutocompleteVersionNumbers struct {
-	Filter    []string `json:"filter"`
-	Tokenizer string   `json:"tokenizer"`
-}
 type Autocomplete struct {
 	Filter    []string `json:"filter"`
 	Tokenizer string   `json:"tokenizer"`
@@ -112,8 +102,8 @@ type Analysis struct {
 	Tokenizer  Tokenizer  `json:"tokenizer"`
 }
 type Tokenizer struct {
-	AutocompleteVersionNumberTokenizer AutocompleteVersionNumberTokenizer `json:"autocomplete_version_number_tokenizer"`
-	AutocompleteTokenizer              AutocompleteTokenizer              `json:"autocomplete_tokenizer"`
+	AutocompleteVersionNumberTokenizer AutocompleteTokenizer `json:"autocomplete_version_number_tokenizer"`
+	AutocompleteTokenizer              AutocompleteTokenizer `json:"autocomplete_tokenizer"`
 }
 
 type Version struct {
