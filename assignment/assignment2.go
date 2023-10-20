@@ -234,32 +234,11 @@ func main() {
 	// 	}
 	// }`)
 
-	file, err := os.Open("data.json")
+	indexData, err := UnmarshalJSON("assign.json")
 	if err != nil {
-		log.Fatalf("Error opening file: %v", err)
-	}
-	defer file.Close()
-
-	content, err := io.ReadAll(file)
-	if err != nil {
-		log.Fatalf("Error reading file: %v", err)
+		log.Fatalf("Error in UnMarshalJson: %v", err)
 	}
 
-	var indexData IndexFormat
-	var indexData2 map[string]interface{}
-
-	// err2 := json.Unmarshal(content, &indexData)
-	// if err2 != nil {
-	// 	fmt.Println("Error found while unmarshal:", err2)
-	// 	return
-	// }
-	err1 := json.Unmarshal(content, &indexData2)
-	if err1 != nil {
-		fmt.Println("Error found while unmarshal:", err1)
-		return
-	}
-
-	fmt.Println(indexData2["comp-7-s-2021.11.22"])
 	fmt.Println("Comp-7-s-2021.11.22:")
 	fmt.Println("Refresh Interval:", indexData.Comp71.Settings.Index.RefreshInterval)
 	fmt.Println("Number of Shards:", indexData.Comp71.Settings.Index.NumberOfShards)
@@ -273,4 +252,24 @@ func main() {
 	// 	return
 	// }
 	//fmt.Println(string(jsonString))
+}
+func UnmarshalJSON(filePath string) (IndexFormat, error) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return IndexFormat{}, fmt.Errorf("error opening file: %v", err)
+	}
+	defer file.Close()
+
+	content, err := io.ReadAll(file)
+	if err != nil {
+		return IndexFormat{}, fmt.Errorf("error reading file: %v", err)
+	}
+
+	var jsonData IndexFormat
+	err = json.Unmarshal(content, &jsonData)
+	if err != nil {
+		return IndexFormat{}, fmt.Errorf("error unmarshalling JSON: %v", err)
+	}
+
+	return jsonData, nil
 }
