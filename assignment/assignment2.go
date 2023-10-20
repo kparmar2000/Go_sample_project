@@ -85,31 +85,35 @@ type AutocompleteVersionNumberTokenizer struct {
 }
 
 type Analyzer struct {
-	Autocomplete struct {
-		Filter    []string `json:"filter"`
-		Tokenizer string   `json:"tokenizer"`
-	} `json:"autocomplete"`
-	AutocompleteVersionNumbers struct {
-		Filter    []string `json:"filter"`
-		Tokenizer string   `json:"tokenizer"`
-	} `json:"autocomplete_version_numbers"`
+	Autocomplete               Autocomplete               `json:"autocomplete"`
+	AutocompleteVersionNumbers AutocompleteVersionNumbers `json:"autocomplete_version_numbers"`
+}
+type AutocompleteVersionNumbers struct {
+	Filter    []string `json:"filter"`
+	Tokenizer string   `json:"tokenizer"`
+}
+type Autocomplete struct {
+	Filter    []string `json:"filter"`
+	Tokenizer string   `json:"tokenizer"`
 }
 
 type Normalizer struct {
-	CaseInsensitive struct {
-		Filter     []string `json:"filter"`
-		Type       string   `json:"type"`
-		CharFilter []string `json:"char_filter"`
-	} `json:"case_insensitive"`
+	CaseInsensitive CaseInsensitive `json:"case_insensitive"`
+}
+type CaseInsensitive struct {
+	Filter     []string `json:"filter"`
+	Type       string   `json:"type"`
+	CharFilter []string `json:"char_filter"`
 }
 
 type Analysis struct {
 	Normalizer Normalizer `json:"normalizer"`
 	Analyzer   Analyzer   `json:"analyzer"`
-	Tokenizer  struct {
-		AutocompleteVersionNumberTokenizer AutocompleteVersionNumberTokenizer `json:"autocomplete_version_number_tokenizer"`
-		AutocompleteTokenizer              AutocompleteTokenizer              `json:"autocomplete_tokenizer"`
-	} `json:"tokenizer"`
+	Tokenizer  Tokenizer  `json:"tokenizer"`
+}
+type Tokenizer struct {
+	AutocompleteVersionNumberTokenizer AutocompleteVersionNumberTokenizer `json:"autocomplete_version_number_tokenizer"`
+	AutocompleteTokenizer              AutocompleteTokenizer              `json:"autocomplete_tokenizer"`
 }
 
 type Version struct {
