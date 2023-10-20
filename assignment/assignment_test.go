@@ -36,7 +36,6 @@ func TestUnmarshalJSON(t *testing.T) {
 		},
 	}
 
-	// Perform deep equality check between expected struct and unmarshalled struct
 	if !reflect.DeepEqual(indexData, expectedIndexData) {
 		t.Errorf("Unmarshalled struct does not match the expected struct. Expected: %+v, Actual: %+v", expectedIndexData, indexData)
 	}
