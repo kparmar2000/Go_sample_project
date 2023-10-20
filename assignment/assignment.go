@@ -5,62 +5,127 @@ import (
 	"fmt"
 )
 
+// type Index struct {
+// 	Settings struct {
+// 		Index struct {
+// 			RefreshInterval string `json:"refresh_interval"`
+// 			NumberOfShards  string `json:"number_of_shards"`
+// 			ProvidedName    string `json:"provided_name"`
+// 			CreationDate    string `json:"creation_date"`
+// 			Analysis        struct {
+// 				Normalizer struct {
+// 					CaseInsensitive struct {
+// 						Filter     []string `json:"filter"`
+// 						Type       string   `json:"type"`
+// 						CharFilter []string `json:"char_filter"`
+// 					} `json:"case_insensitive"`
+// 				} `json:"normalizer"`
+// 				Analyzer struct {
+// 					Autocomplete struct {
+// 						Filter    []string `json:"filter"`
+// 						Tokenizer string   `json:"tokenizer"`
+// 					} `json:"autocomplete"`
+// 					AutocompleteVersionNumbers struct {
+// 						Filter    []string `json:"filter"`
+// 						Tokenizer string   `json:"tokenizer"`
+// 					} `json:"autocomplete_version_numbers"`
+// 				} `json:"analyzer"`
+// 				Tokenizer struct {
+// 					AutocompleteVersionNumberTokenizer struct {
+// 						TokenChars []string `json:"token_chars"`
+// 						MinGram    string   `json:"min_gram"`
+// 						Type       string   `json:"type"`
+// 						MaxGram    string   `json:"max_gram"`
+// 					} `json:"autocomplete_version_number_tokenizer"`
+// 					AutocompleteTokenizer struct {
+// 						TokenChars []string `json:"token_chars"`
+// 						MinGram    string   `json:"min_gram"`
+// 						Type       string   `json:"type"`
+// 						MaxGram    string   `json:"max_gram"`
+// 					} `json:"autocomplete_tokenizer"`
+// 				} `json:"tokenizer"`
+// 			} `json:"analysis"`
+// 			NumberOfReplicas string `json:"number_of_replicas"`
+// 			UUID             string `json:"uuid"`
+// 			Version          struct {
+// 				Created string `json:"created"`
+// 			} `json:"version"`
+// 		} `json:"index"`
+// 	} `json:"settings"`
+// }
+
+type AutocompleteTokenizer struct {
+	TokenChars []string `json:"token_chars"`
+	MinGram    string   `json:"min_gram"`
+	Type       string   `json:"type"`
+	MaxGram    string   `json:"max_gram"`
+}
+
+type AutocompleteVersionNumberTokenizer struct {
+	TokenChars []string `json:"token_chars"`
+	MinGram    string   `json:"min_gram"`
+	Type       string   `json:"type"`
+	MaxGram    string   `json:"max_gram"`
+}
+
+type Analyzer struct {
+	Autocomplete struct {
+		Filter    []string `json:"filter"`
+		Tokenizer string   `json:"tokenizer"`
+	} `json:"autocomplete"`
+	AutocompleteVersionNumbers struct {
+		Filter    []string `json:"filter"`
+		Tokenizer string   `json:"tokenizer"`
+	} `json:"autocomplete_version_numbers"`
+}
+
+type Normalizer struct {
+	CaseInsensitive struct {
+		Filter     []string `json:"filter"`
+		Type       string   `json:"type"`
+		CharFilter []string `json:"char_filter"`
+	} `json:"case_insensitive"`
+}
+
+type Analysis struct {
+	Normalizer Normalizer `json:"normalizer"`
+	Analyzer   Analyzer   `json:"analyzer"`
+	Tokenizer  struct {
+		AutocompleteVersionNumberTokenizer AutocompleteVersionNumberTokenizer `json:"autocomplete_version_number_tokenizer"`
+		AutocompleteTokenizer              AutocompleteTokenizer              `json:"autocomplete_tokenizer"`
+	} `json:"tokenizer"`
+}
+
+type Version struct {
+	Created string `json:"created"`
+}
+
 type Index struct {
-	Settings struct {
-		Index struct {
-			RefreshInterval string `json:"refresh_interval"`
-			NumberOfShards  string `json:"number_of_shards"`
-			ProvidedName    string `json:"provided_name"`
-			CreationDate    string `json:"creation_date"`
-			Analysis        struct {
-				Normalizer struct {
-					CaseInsensitive struct {
-						Filter     []string `json:"filter"`
-						Type       string   `json:"type"`
-						CharFilter []string `json:"char_filter"`
-					} `json:"case_insensitive"`
-				} `json:"normalizer"`
-				Analyzer struct {
-					Autocomplete struct {
-						Filter    []string `json:"filter"`
-						Tokenizer string   `json:"tokenizer"`
-					} `json:"autocomplete"`
-					AutocompleteVersionNumbers struct {
-						Filter    []string `json:"filter"`
-						Tokenizer string   `json:"tokenizer"`
-					} `json:"autocomplete_version_numbers"`
-				} `json:"analyzer"`
-				Tokenizer struct {
-					AutocompleteVersionNumberTokenizer struct {
-						TokenChars []string `json:"token_chars"`
-						MinGram    string   `json:"min_gram"`
-						Type       string   `json:"type"`
-						MaxGram    string   `json:"max_gram"`
-					} `json:"autocomplete_version_number_tokenizer"`
-					AutocompleteTokenizer struct {
-						TokenChars []string `json:"token_chars"`
-						MinGram    string   `json:"min_gram"`
-						Type       string   `json:"type"`
-						MaxGram    string   `json:"max_gram"`
-					} `json:"autocomplete_tokenizer"`
-				} `json:"tokenizer"`
-			} `json:"analysis"`
-			NumberOfReplicas string `json:"number_of_replicas"`
-			UUID             string `json:"uuid"`
-			Version          struct {
-				Created string `json:"created"`
-			} `json:"version"`
-		} `json:"index"`
-	} `json:"settings"`
+	RefreshInterval  string   `json:"refresh_interval"`
+	NumberOfShards   string   `json:"number_of_shards"`
+	ProvidedName     string   `json:"provided_name"`
+	CreationDate     string   `json:"creation_date"`
+	Analysis         Analysis `json:"analysis"`
+	NumberOfReplicas string   `json:"number_of_replicas"`
+	UUID             string   `json:"uuid"`
+	Version          Version  `json:"version"`
+}
+
+type Settings struct {
+	Index Index `json:"index"`
+}
+
+type IndexStructure struct {
+	Settings Settings `json:"settings"`
 }
 
 type IndexFormat struct {
-	Comp71 Index `json:"comp-7-s-2021.11.22"`
-	Comp72 Index `json:"comp-7-s-2021.11.23"`
+	Comp71 IndexStructure `json:"comp-7-s-2021.11.22"`
+	Comp72 IndexStructure `json:"comp-7-s-2021.11.23"`
 }
 
 func main() {
-	jsonData := `{
+	jsonData := []byte(`{
 		"comp-7-s-2021.11.22": {
 			"settings": {
 				"index": {
@@ -157,15 +222,29 @@ func main() {
 				}
 			}
 		}
-	}`
+	}`)
+
+	// file, err := ioutil.ReadFile("assign.json")
+	// if err != nil {
+	// 	fmt.Println("Error opening file:", err)
+	// 	return
+	// }
 
 	var indexData IndexFormat
-	err := json.Unmarshal([]byte(jsonData), &indexData)
-	if err != nil {
-		fmt.Println("Error:", err)
+	var indexData2 map[string]interface{}
+
+	err2 := json.Unmarshal(jsonData, &indexData)
+	if err2 != nil {
+		fmt.Println("Error found while unmarshal:", err2)
+		return
+	}
+	err1 := json.Unmarshal(jsonData, &indexData2)
+	if err1 != nil {
+		fmt.Println("Error found while unmarshal:", err1)
 		return
 	}
 
+	fmt.Println(indexData2["comp-7-s-2021.11.22"])
 	fmt.Println("Comp-7-s-2021.11.22:")
 	fmt.Println("Refresh Interval:", indexData.Comp71.Settings.Index.RefreshInterval)
 	fmt.Println("Number of Shards:", indexData.Comp71.Settings.Index.NumberOfShards)
@@ -173,5 +252,10 @@ func main() {
 	fmt.Println("Comp-7-s-2021.11.23:")
 	fmt.Println("Refresh Interval:", indexData.Comp72.Settings.Index.RefreshInterval)
 	fmt.Println("Number of Shards:", indexData.Comp72.Settings.Index.NumberOfShards)
-
+	// jsonString, err := json.MarshalIndent(indexData, "", " ")
+	// if err != nil {
+	// 	fmt.Println("Error:", err)
+	// 	return
+	// }
+	//fmt.Println(string(jsonString))
 }
