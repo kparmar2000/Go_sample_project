@@ -156,23 +156,32 @@ func main() {
 	//fmt.Println(string(jsonString))
 }
 func UnmarshalJSON(filePath string) (IndexFormat, error) {
-	file, err := os.Open(filePath)
-	if err != nil {
-		return IndexFormat{}, fmt.Errorf("error opening file: %v", err)
-	}
-	defer file.Close()
 
-	content, err := io.ReadAll(file)
+	content, err := JsonData(filePath)
 	if err != nil {
 		return IndexFormat{}, fmt.Errorf("error reading file: %v", err)
 	}
 
 	var jsonData IndexFormat
 	//fmt.Println(jsonData)
-	err = json.Unmarshal(content, &jsonData)
+	err = json.Unmarshal([]byte(content), &jsonData)
 	if err != nil {
 		return IndexFormat{}, fmt.Errorf("error unmarshalling JSON: %v", err)
 	}
 
 	return jsonData, nil
+}
+func JsonData(filePath string) (string, error) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return "error in opening file.", fmt.Errorf("error opening file: %v", err)
+	}
+	defer file.Close()
+
+	content, err := io.ReadAll(file)
+	if err != nil {
+		return "error in reading file.", fmt.Errorf("error reading file: %v", err)
+	}
+	fmt.Print(string(content))
+	return string(content), nil
 }

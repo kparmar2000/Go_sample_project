@@ -1,6 +1,9 @@
 package main
 
 import (
+	"io"
+	"os"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -55,9 +58,27 @@ type ExpectedStruct struct {
 // }
 
 func TestUnmarshalJSON(t *testing.T) {
-	filePath := "assign12.json"
-	isvalid := assert.FileExists(t, filePath, "dir does not exist")
+	filePath := "assign.json"
+	isvalid := assert.FileExists(t, filePath, "file does exist")
 	assert.True(t, isvalid, "Error:file does not exist")
+
+	file, err := os.Open(filePath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer file.Close()
+	content, err := io.ReadAll(file)
+	if err != nil {
+		t.Fatal(err)
+	}
+	jsonfData, err := JsonData(filePath)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	containsKeyword := strings.Contains(string(content), jsonfData)
+
+	assert.True(t, containsKeyword, "Error:content is not matching")
 
 	indexData, err := UnmarshalJSON(filePath)
 	assert.NoError(t, err, "Error unmarshalling JSON")
@@ -69,3 +90,14 @@ func TestUnmarshalJSON(t *testing.T) {
 	assert.Equal(t, expectedComp72NumberOfShards, indexData.Comp72.Settings.Index.NumberOfShards, "Unexpected Comp-7-s-2021.11.23 NumberOfShards")
 
 }
+
+// func TestNegativeUnmarshalJSON(t *testing.T) {
+// 	filePath := "assign12.json"
+// 	isvalid := assert.FileExists(t, filePath, "File does not exist")
+// 	assert.True(t, isvalid, "Error: file does not exist")
+
+// 	indexData, err := UnmarshalJSON(filePath)
+// 	assert.Error(t, err, "Expected error while unmarshalling invalid JSON")
+// 	assert.Nil(t, indexData, "IndexData should be nil for invalid JSON")
+
+// }
