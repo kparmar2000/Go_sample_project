@@ -135,104 +135,6 @@ type IndexFormat struct {
 }
 
 func main() {
-	// jsonData := []byte(`{
-	// 	"comp-7-s-2021.11.22": {
-	// 		"settings": {
-	// 			"index": {
-	// 				"refresh_interval": "1s",
-	// 				"number_of_shards": "5",
-	// 				"provided_name": "comp-7-s-2021.11.22",
-	// 				"creation_date": "1637661228822",
-	// 				"analysis": {
-	// 					"normalizer": {
-	// 						"case_insensitive": {
-	// 							"filter": ["lowercase", "asciifolding"],
-	// 							"type": "custom",
-	// 							"char_filter": []
-	// 						}
-	// 					},
-	// 					"analyzer": {
-	// 						"autocomplete": {
-	// 							"filter": ["lowercase"],
-	// 							"tokenizer": "autocomplete_tokenizer"
-	// 						},
-	// 						"autocomplete_version_numbers": {
-	// 							"filter": ["lowercase"],
-	// 							"tokenizer": "autocomplete_version_number_tokenizer"
-	// 						}
-	// 					},
-	// 					"tokenizer": {
-	// 						"autocomplete_version_number_tokenizer": {
-	// 							"token_chars": ["letter", "digit", "punctuation"],
-	// 							"min_gram": "2",
-	// 							"type": "edge_ngram",
-	// 							"max_gram": "20"
-	// 						},
-	// 						"autocomplete_tokenizer": {
-	// 							"token_chars": ["letter", "digit"],
-	// 							"min_gram": "2",
-	// 							"type": "edge_ngram",
-	// 							"max_gram": "20"
-	// 						}
-	// 					}
-	// 				},
-	// 				"number_of_replicas": "1",
-	// 				"uuid": "w72cfW0GR8uCG8snqUI7Dg",
-	// 				"version": {
-	// 					"created": "6081499"
-	// 				}
-	// 			}
-	// 		}
-	// 	},
-	// 	"comp-7-s-2021.11.23": {
-	// 		"settings": {
-	// 			"index": {
-	// 				"refresh_interval": "1s",
-	// 				"number_of_shards": "5",
-	// 				"provided_name": "comp-7-s-2021.11.23",
-	// 				"creation_date": "1637661229195",
-	// 				"analysis": {
-	// 					"normalizer": {
-	// 						"case_insensitive": {
-	// 							"filter": ["lowercase", "asciifolding"],
-	// 							"type": "custom",
-	// 							"char_filter": []
-	// 						}
-	// 					},
-	// 					"analyzer": {
-	// 						"autocomplete": {
-	// 							"filter": ["lowercase"],
-	// 							"tokenizer": "autocomplete_tokenizer"
-	// 						},
-	// 						"autocomplete_version_numbers": {
-	// 							"filter": ["lowercase"],
-	// 							"tokenizer": "autocomplete_version_number_tokenizer"
-	// 						}
-	// 					},
-	// 					"tokenizer": {
-	// 						"autocomplete_version_number_tokenizer": {
-	// 							"token_chars": ["letter", "digit", "punctuation"],
-	// 							"min_gram": "2",
-	// 							"type": "edge_ngram",
-	// 							"max_gram": "20"
-	// 						},
-	// 						"autocomplete_tokenizer": {
-	// 							"token_chars": ["letter", "digit"],
-	// 							"min_gram": "2",
-	// 							"type": "edge_ngram",
-	// 							"max_gram": "20"
-	// 						}
-	// 					}
-	// 				},
-	// 				"number_of_replicas": "1",
-	// 				"uuid": "XjiLB2xYTwqk7F83FGL_hg",
-	// 				"version": {
-	// 					"created": "6081499"
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }`)
 
 	indexData, err := UnmarshalJSON("assign.json")
 	if err != nil {
@@ -266,6 +168,7 @@ func UnmarshalJSON(filePath string) (IndexFormat, error) {
 	}
 
 	var jsonData IndexFormat
+	//fmt.Println(jsonData)
 	err = json.Unmarshal(content, &jsonData)
 	if err != nil {
 		return IndexFormat{}, fmt.Errorf("error unmarshalling JSON: %v", err)

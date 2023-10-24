@@ -16,7 +16,7 @@
                             "type": "custom",
                             "char_filter": []
                         }
-                    },
+                    }, 
                     "analyzer": {
                         "autocomplete": {
                             "filter": [
